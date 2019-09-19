@@ -20,8 +20,7 @@ $(document).ready(function () {
 // TODO
 
 /* 2019
- * commenting doProgress code, implement EXPO
-
+ belohnung klarer
 */
 
 /* outoffocus: pause 

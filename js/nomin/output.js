@@ -120,14 +120,19 @@ output = {
 
         $("#catStats").find(".catWPS").html(two(game.calcWPS(cat)))
                 .parent().find(".catWPD").html(two(game.calcWPD(cat)))
-                .parent().find(".catEXPO").html(two(game.calcEXPO(cat)));
+                .parent().find(".catEXPO").html(two(game.calcEXPO(cat)))
+                .parent().find(".catEXPOLIMIT").html(two(game.calcEXPOLimit(cat)));
+
+                
 
 
         //Lädt die Upgrades der Katzen aus.
         for (var kind in catUps) { //WPS, WPD, etc
+            
             if (catUps.hasOwnProperty(kind)) {
                 //Jetzt auslesen der Upgrades einer Art
                 var ups = catUps[kind];
+                
                 var upgrades = "";
                 for (var id in ups) { //cat workout 1, cat workout 2, etc
                     var up = ups[id];
@@ -143,6 +148,7 @@ output = {
                     if (cost > money || maxNum <= progNum)
                         disabled = "disabled";
 
+                        
                     upgrades += '<div class="upgrade" data-name="' + id + '">' +
                             '<div class="upTitle">' + up.label + '</div>' +
                             '<div class="upDesc">' + up.desc + '</div>' +
@@ -247,11 +253,10 @@ output = {
         $("#catEnergy > .bar").css('background-color', hex).width(percent+"%");
 
         //Energie in Zahlen anzeigen
-        $("#current_wpd").html(`${wpd.toFixed(0)}/${max_wpd} WPD`);
+        $("#current_wpd").html(`${wpd.toFixed(2)}/${max_wpd} WPD`);
 
         //WPS in Zahlen anzeigen
         let catwps = game.level.cats[cat].wps; //game.calcWPS(cat);     
-        console.log(catwps)   
         $("#current_wps").html(`${catwps.toFixed(2)} WPS`);
 
     },

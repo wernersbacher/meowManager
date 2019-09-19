@@ -49,7 +49,7 @@
 
                     <div id="navRight">
 
-                        <button id="reloadBtn" data-hide="mainmenu levelSelect guide manageCats" class="btn btn-success glyphicon glyphicon-repeat menuBarBtn "></button>
+                        <button id="reloadBtn" data-hide="mainmenu changelog levelSelect guide manageCats" class="btn btn-success glyphicon glyphicon-repeat menuBarBtn "></button>
 
                         <button id="optionsButton" data-hide="" class="btn btn-default glyphicon glyphicon-cog menuBarBtn"></button>
 
@@ -73,6 +73,7 @@
                 <button type="button" data-target="levelSelect" class="mainMenuButton btn btn-success btn-block btn-lg raised">SELECT LEVEL</button>
                 <button type="button" data-target="manageCats" class="mainMenuButton btn btn-success btn-block btn-lg raised">MANAGEMENT</button>
                 <button type="button" data-target="guide" class="mainMenuButton btn btn-info btn-block btn-lg raised">GUIDE</button>
+                <button type="button" data-target="changelog" class="mainMenuButton btn btn-info btn-block btn-lg raised">Changelog</button>
                 <button id="resetHard" type="button" data-target="" class="mainMenuButton btn btn-red btn-block btn-lg raised">RESET</button>
 
             </div>
@@ -111,7 +112,7 @@
             <div class="tab" id="manageCats" data-parent="mainmenu">
                 <ul id="manageMenu" class="nav nav-pills ">
                     <li data-pill="cats" class="active"><a href="#">CATS</a></li>
-                    <li data-pill="todo"><a href="#">TO-DO</a></li>
+                   <!-- <li data-pill="todo"><a href="#">TO-DO</a></li>-->
                 </ul>
                 <div data-manage="cats" class="manage_cats manage_tab">
 
@@ -120,7 +121,8 @@
                     <div id="catStats">
                         WPS: <span class="catWPS"></span> | 
                         WPD: <span class="catWPD"></span> | 
-                        EXPO: <span class="catEXPO"></span>
+                        EXPO: <span class="catEXPO"></span> |
+                        EXPO Limit: <span class="catEXPOLIMIT"></span> |
                     </div>
 
                     <div class="panel panel-green">
@@ -139,11 +141,22 @@
                         <div id="expo_up" class="panel-body">Panel Content</div>
                     </div>
 
+                    <div class="panel panel-green">
+                            <div class="panel-heading">EXPO LIMIT</div>
+                            <div id="expo_limit_up" class="panel-body">Panel Content</div>
+                    </div>
+
+                    <div class="panel panel-green">
+                            <div class="panel-heading">Restoring WPD</div>
+                            <div id="restoring_up" class="panel-body">Panel Content</div>
+                    </div>
+
                 </div>
                 
+                <!--
                 <div data-manage="todo" class="manage_todo manage_tab">
                     <h2>TODO</h2>
-                </div>
+                </div>-->
                 
             </div>
             <!-- Katzen Management -->
@@ -154,7 +167,10 @@
 
                 <h2>GUIDE</h2>
 
-                <h3>What are the god damn colors?</h3>
+                <h3>Start here..</h3>
+                Select a level and try to finish the chores as fast as possible.
+
+                <h3>What's the meaning of the colors?</h3>
 
                 <h4 style="color:#7f0000">red</h4>
                 This chore is needing help and cannot do anything without you.
@@ -162,15 +178,22 @@
                 <h4 style="color:#FFA500">orange</h4>
                 This chore is working on its own, and proceedes without a cats help.
 
+                <h3> Stats & Upgrades </h3>
 
-                <h3>WPS <small class="text-muted">Work per second</small></h3>
+                <h4>WPS <small class="text-muted">Work per second</small></h4>
                 The work a cat can do per second, simple as that. The higher the better.
 
-                <h3>WPD <small class="text-muted">Work endurance</small></h3>
+                <h4>WPD <small class="text-muted">Work endurance</small></h4>
                 The work a cat can do before it haz to make a break.
 
-                <h3>EXPO <small class="text-muted">Work endurance</small></h3>
+                <h4>EXPO <small class="text-muted">Work endurance</small></h4>
                 Bonus for not changing tasks!
+
+                <h4>EXPO Limit <small class="text-muted">max time bonus</small></h4>
+                The max. time bonus (expo bonus) can get higher because the limit is raised.
+
+                <h4>Restore <small class="text-muted">loading up WPD</small></h4>
+                When not working, the cat is restoring some WPD.
 
                 <h3>more info</h3>
                 Just do your chores as quickly as possible! Get some paws to update your cat(s)
@@ -178,6 +201,15 @@
             </div>
             <!-- GUIDE ENDE -->
 
+
+            <div class="tab" id="changelog" data-parent="mainmenu" >
+                <h2>Changelog</h2>
+
+                <h3>v1.0</h3>
+                Inital release
+
+            </div>
+                
 
         </div>
 

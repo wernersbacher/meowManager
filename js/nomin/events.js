@@ -13,7 +13,14 @@ events = {
         events.clickOutsideDialog();
         events.resetButton();
 
+        events.collapsingPanels();
+
         events.doResize();
+    },
+    collapsingPanels: function() {
+        $(".panel-green > .panel-heading").click(function() {
+            $(this).parent().find(".panel-body").toggle();
+        });
     },
     itemClick: function () {
         $(".item").click(function () {

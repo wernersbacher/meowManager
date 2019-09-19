@@ -12,12 +12,12 @@ game = {
     workTimer: false,
     totalTimer: false,
     autoWps: 1,
-    restWps: 1,
+    restWps: 0.5,
     levelRunning: false,
 
     config: {
         max_expo_multi: 2,
-        expo_default_power: 1.1
+        expo_default_power: 1.05
     },
     //++ Methods ++++
     init: function () {
@@ -109,7 +109,7 @@ game = {
             if (catObj.hasOwnProperty(key)) {
 
                 let cat = key;
-                level.cats[cat] = {wpd: game.calcWPD(cat)};
+                level.cats[cat] = {wpd: game.calcWPD(cat), wpd_max: game.calcWPD(cat), restorewps: game.calcRestoreWPS(cat)};
             }
         }
 
@@ -304,10 +304,12 @@ game = {
             if (katzen.hasOwnProperty(key)) {
                 var object = ownerToObject(key, game.level.objects);
                 if (!object || game.level.objects[object].auto) {
-                    var add = game.restWps / game.fps,
-                            max_wpd = game.calcWPD(key),
+                             
+                    
+                    var add = katzen[key].restorewps / game.fps,
+                            max_wpd = katzen[key].wpd_max,
                             wpd = katzen[key].wpd;
-
+                    
                     if (wpd + add > max_wpd)
                         game.level.cats[key].wpd = max_wpd;
                     else
@@ -334,6 +336,13 @@ game = {
         return expo * multi;
     },
 
+    calcRestoreWPS: function(cat) {
+        var base = game.restWps;
+        var cat_base = cats[cat].restore; 
+        var multi = game.session.catStats[cat].restoring;
+        return (cat_base+(multi-1))*base; //calc restore, has to be zero if no restore multi
+    },
+
     calcWPSLive: function (cat) { 
         var base_wps = game.calcWPS(cat);
         
@@ -343,14 +352,21 @@ game = {
         var start_time = game.level.assignTimes[cat];
         var since = (now-start_time)/1000;
 
-        var expo_factor = game.calcEXPOFactor(since, expo) //calculate boost from staying at same task
+        var limit = game.calcEXPOLimit(cat);
+        var expo_factor = game.calcEXPOFactor(since, expo, limit) //calculate boost from staying at same task
 
         return base_wps * expo_factor;
     },
 
-    calcEXPOFactor: function (time, expo_base) { //that value changes while playing
+    calcEXPOLimit: function(cat) {
+        var limit = game.config.max_expo_multi;
+        var multi = game.session.catStats[cat].expo_limit;
+        return limit * multi;
+    },
+
+    calcEXPOFactor: function (time, expo_base, expo_limit) { //that value changes while playing
         // formula 
-        return Math.min(1 + (expo_base-1)*Math.pow(time, game.config.expo_default_power), game.config.max_expo_multi)
+        return Math.min(1 + (expo_base-1)*Math.pow(time, game.config.expo_default_power), expo_limit)
     },
 
     updateAllCats: function () {
@@ -361,13 +377,17 @@ game = {
                 game.updateCatUps(cat);
             }
         }
-    },
+    }, //upgrades are here, needs better idea for special upgrades
     updateCatUps: function (cat) {
         var ups = game.data.cats[cat].ups;
         var wps = 1,
                 wpd = 1,
-                expo = 1;
-
+                expo = 1,
+                expo_limit = 1,
+                restoring = 1;
+        /* TODO:
+            dont check hardcoded for updates?
+        */
         for (var up in ups) { //durchgehen der upgrades der katze
             if (ups.hasOwnProperty(up)) { //obligatorisch
                 //wenn das upgrade bei wps zu finden ist..
@@ -379,10 +399,18 @@ game = {
                 
                 } else if (catUps.expo.hasOwnProperty(up)) {
                     expo *= Math.pow(catUps.expo[up].multi, ups[up]);
-                }
+                
+                } else if (catUps.expo_limit.hasOwnProperty(up)) {
+                    expo_limit *= Math.pow(catUps.expo_limit[up].multi, ups[up]);
+                
+                } else if (catUps.restoring.hasOwnProperty(up)) {
+                    restoring *= Math.pow(catUps.restoring[up].multi, ups[up]);
+                } 
+
+                //restoring
             }
         }
-        game.session.catStats[cat] = {wps: wps, wpd: wpd, expo: expo};
+        game.session.catStats[cat] = {wps: wps, wpd: wpd, expo: expo, expo_limit: expo_limit, restoring:restoring};
     },
     checkLevel: function () { //schaut, ob Level geschafft wurde
         var objects = game.level.objects;
