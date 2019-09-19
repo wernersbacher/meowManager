@@ -31,6 +31,9 @@ events = {
                 if (delKey) //Falls die alte Katze ein Platz hatte..löschen
                     game.level.objects[delKey].owner.remove(activeCat);
                 game.level.objects[clickedObject].owner.push(activeCat); //Neues Objekt setzen
+
+                game.level.assignTimes[activeCat] = timestamp(); //sets the time the cat got assigned to the task.
+
             }
 
             output.moveCat(clickedObject, activeCat, show);

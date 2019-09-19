@@ -112,6 +112,7 @@ game = {
         level.activeCat = game.getFirstCat(); //nimmt die erste Katze als aktiv
 
         level.objects = {};
+        level.assignTimes = {};
         level.levelSet = lvlnr;
         //Geht das Level durch und lädt die Objekte
         Object.entries(levels[level.levelSet].objects).forEach(([key, val]) => { //j ist der index des bereiches, der gemacht werden muss
@@ -171,11 +172,13 @@ game = {
     doProgress: function () {
         //Berechnung der einzelnen wps, die an einem Objekt durchgeführt werden
         Object.entries(game.level.objects).forEach(([key, val]) => { //Durchgehen der einzelnen Objekte im Level
+            
             var progress = game.level.objects[key]["progress"];
             if (progress >= wp) //überspringt objekt, wenn es schon fertig ist
                 return;
+
             var level = game.level.levelSet;
-            var start = levels[level].objects[key].start; //Start array
+            var start = levels[level].objects[key].start; //Start value for cats attention
             var end = levels[level].objects[key].end;
             var max_i = levels[level].objects[key].start.length;
             var wps = 0;
@@ -189,6 +192,7 @@ game = {
             game.level.objects[key].lastAuto = game.level.objects[key].auto;
 
             //Schaut, ob der Fortschritt im aktiven Bereich ist
+            // checks if we are currently in an automatic area
             for (i = 0, l = start.length; i < l; i++) {
                 if (progress >= calcWP(start[i], wp) && progress < calcWP(end[i], wp)) {
                     auto = false;
@@ -201,14 +205,15 @@ game = {
             game.level.objects[key].auto = auto;
 
 
-            if (auto) { //Falls im Selbstmach Bereich, füge auto wps hinzu
+            if (auto) { //if we are currently automatic..
                 wps += game.autoWps; //calculateAutoWps()
             }
 
             if (!auto && owner.length) {
-                //Falls nicht im auto bereich und katze, dann füge katzen wps hinzu
+                //if we aren't automatic AND there is a cat assigned..
                 for (var i = 0, l = owner.length; i < l; i++) {
                     let catwps = game.calcWPS(owner[i]);
+                    
                     //Hier werden alle Katzen durchgegangen, die auf einem Objekt sitzen und entsprechend die wps erhöht
                     wps += catwps; //owner[i] = katze
 

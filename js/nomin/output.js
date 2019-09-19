@@ -249,8 +249,13 @@ output = {
         //Energie in Zahlen anzeigen
         $("#current_wpd").html(`${wpd.toFixed(0)}/${max_wpd} WPD`);
 
+        //WPS in Zahlen anzeigen
+        let catwps = game.calcWPS(cat);        
+        $("#current_wps").html(`${catwps.toFixed(2)} WPS`);
+
     },
     resetEnergy: function() {
+        $("#current_wps").html(`... WPS`);
         $("#current_wpd").html(`... WPD`);
         $("#catEnergy > .bar").css('background-color', "green").width("100%");
     },
