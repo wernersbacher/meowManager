@@ -6,7 +6,7 @@ var game = {};
 
 game = {
 
-    fps: 30,
+    fps: 15,
     prevRuntime: 0,
     latency: 0,
     workTimer: false,

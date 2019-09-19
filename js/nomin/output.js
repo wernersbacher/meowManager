@@ -259,6 +259,10 @@ output = {
         let catwps = game.level.cats[cat].wps; //game.calcWPS(cat);     
         $("#current_wps").html(`${catwps.toFixed(2)} WPS`);
 
+        //Show game timer
+        var since = new Date().getTime() - game.level.start;
+        $("#current_timer").html(formatDate(since));
+
     },
     resetEnergy: function() {
         $("#current_wps").html(`... WPS`);

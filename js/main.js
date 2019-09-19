@@ -20,7 +20,20 @@ $(document).ready(function () {
 // TODO
 
 /* 2019
- belohnung klarer
+
+ currently: 
+ sterne
+ timer anzeigen
+
+ fixes:
+
+ features:
+ dinge verlieren prozent, wenn sie zu lange idlen
+ abhängigkeiten von anderen chores
+ shop für bossts etc
+ achievements
+ pause buttons
+ katzen
 */
 
 /* outoffocus: pause 

@@ -21,7 +21,27 @@ objects = {
         desc: "Hope it will be clean enough!",
         descUp: "Evaporate faaaster!"
     
-    }
+    },
+    sink: { //name bzw id des objekts
+        title: "Kitchen Sink", //titel im Spiel
+        desc: "Gotta wash you paws bra",
+        descUp: "FASTER!"
+    
+    },
+    chimney: { //name bzw id des objekts
+        title: "Chimney", //titel im Spiel
+        desc: "Gotta get diiirty", //https://www.iconfinder.com/iconsets/household-things
+        descUp: "Please do it man "
+    
+    },
+    fire: { //name bzw id des objekts
+        title: "CHECKIFTHEREISFFIREE", //titel im Spiel
+        desc: "We see no flames charles",
+        descUp: "nice to have"
+    
+    },
+
+
     
 };
 
