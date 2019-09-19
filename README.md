@@ -1,0 +1,1 @@
+Simple Javascript game, just experimental

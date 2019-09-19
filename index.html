@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="favicon.ico">
+
+        <title>Meow</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug 
+        <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">-->
+
+        <!-- Custom styles for this template -->
+        <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+        <link href="css/grid.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-flex" style="position:relative;">
+                    <div id="navLeft">
+
+                        <button id="homeBtn" data-hide="" class="btn btn-success glyphicon glyphicon-home menuBarBtn"></button>
+
+                        <button id="backBtn" data-hide="mainmenu" class="btn btn-success glyphicon glyphicon-arrow-left menuBarBtn "></button>
+
+
+
+                    </div>
+
+                    <div id="navMiddle" class="" href="#">Loading..</div>
+
+                    <div id="navRight">
+
+                        <button id="reloadBtn" data-hide="mainmenu levelSelect manageCats" class="btn btn-success glyphicon glyphicon-repeat menuBarBtn "></button>
+
+                        <button id="optionsButton" data-hide="" class="btn btn-default glyphicon glyphicon-cog menuBarBtn"></button>
+
+                    </div>
+                </div>
+
+                <!--/.nav-collapse -->
+
+            </div>
+        </nav>
+
+        <!-- Begin page content -->
+        <div id="pages" data-page="mainmenu" class="container">
+
+
+            <!-- Hauptmenue -->
+
+            <div class="tab" id="mainmenu">
+                <div id="logo"></div>
+
+                <button type="button" data-target="levelSelect" class="mainMenuButton btn btn-success btn-block btn-lg raised">SELECT LEVEL</button>
+                <button type="button" data-target="manageCats" class="mainMenuButton btn btn-success btn-block btn-lg raised">MANAGEMENT</button>
+                <button id="resetHard" type="button" data-target="" class="mainMenuButton btn btn-red btn-block btn-lg raised">RESET</button>
+
+            </div>
+
+            <!-- Hauptmenue ENDE -->
+
+
+
+            <!-- Spielfeld -->
+            <div class="tab" id="levelSelect" data-parent="mainmenu">
+
+
+            </div>
+            <!-- Spielfeld ENDE -->
+
+
+
+            <!-- Spielfeld -->
+            <div class="tab" id="gameGrid" data-parent="levelSelect">
+                <div id="catEnergy">
+                    <div class="bar"></div>
+                </div>
+                
+                <div id="gameObjects"></div>
+
+                
+                
+            </div>
+            <!-- Spielfeld ENDE -->
+
+            <!-- Katzen Management -->
+            <div class="tab" id="manageCats" data-parent="mainmenu">
+                <ul id="manageMenu" class="nav nav-pills ">
+                    <li data-pill="cats" class="active"><a href="#">CATS</a></li>
+                    <li data-pill="todo"><a href="#">TO-DO</a></li>
+                </ul>
+                <div data-manage="cats" class="manage_cats manage_tab">
+
+                    <h2>Cat Manager</h2>
+
+                    <div id="catStats">
+                        WPS: <span class="catWPS"></span> | 
+                        WPD: <span class="catWPD"></span> | 
+                        EXPO: <span class="catEXPO"></span>
+                    </div>
+
+                    <div class="panel panel-green">
+                        <div class="panel-heading">WPS</div>
+                        <div id="wps_up" class="panel-body">                      
+                        </div>
+                    </div>
+
+                    <div class="panel panel-green">
+                        <div class="panel-heading">WPD</div>
+                        <div id="wpd_up" class="panel-body">Panel Content</div>
+                    </div>
+
+                    <div class="panel panel-green">
+                        <div class="panel-heading">EXPO</div>
+                        <div id="expo_up" class="panel-body">Panel Content</div>
+                    </div>
+
+                </div>
+                
+                <div data-manage="todo" class="manage_todo manage_tab">
+                    <h2>TODO</h2>
+                </div>
+                
+            </div>
+            <!-- Katzen Management -->
+
+
+
+        </div>
+
+        <div id="dialogs">
+
+            <div id="levelInfo" class="dialogScale">
+                <h3 class="title">Beginner</h3>
+                <table class="starTable">
+                    <tr> <!-- Ein Stern -->
+                        <td><div class="px28"><img src="img/star.png" /></div> </td>
+                        <td class="oneStar"> 17.000 sec</td>
+                    </tr>
+                    <tr><!-- Zwei Sterne -->
+                        <td><div class="px28"><img src="img/star.png" /><img src="img/star.png" /></div> </td>
+                        <td class="twoStar"> 25.000 sec</td>
+                    </tr>
+                    <tr><!-- Drei Sterne -->
+                        <td><div class="px28"><img src="img/star.png" /><img src="img/star.png" /><img src="img/star.png" /></div> </td>
+                        <td class="threeStar"> 30.000 sec</td>
+                    </tr>
+                    </tr>
+                    <tr><!-- Rekord -->
+                        <td><div class="px28">BEST:</div> </td>
+                        <td class="best"> 23.000 sec</td>
+                    </tr>
+                </table>
+                <button id="playBtn" data-hide="" class="btn btn-success btn-lg btn-dia">PLAY</button>
+
+            </div>
+
+
+            <div id="levelFin" class="dialogScale">
+                <h3 class="title">You're done!</h3>
+
+                <div id="finStars">
+
+                </div>
+
+                <p class="center-block finText">
+                    <span class="finLevel">Level x</span>
+                    <span class="finNewHi"></span>
+                </p>
+
+                <table class="starTable">
+                    <tr> 
+                        <td><div class="px28"> BEST: </div> </td>
+                        <td class="finBest"> 17.000 sec</td>
+                    </tr>
+                    <tr>
+                        <td><div class="px28"> Your time</div> </td>
+                        <td class="finNew"> 25.000 sec</td>
+                    </tr>
+                </table>
+
+                <div class="text-center">
+                    <div class="btn-group btn-group-lg btn-dia"  id="finButtons">
+                        <button id="mainBtn" data-hide="" class="btn btn-success  btn-lg">HOME</button>
+                        <button id="retryBtn" data-hide="" class="btn btn-success  btn-lg">RETRY</button>
+                        <button id="nextBtn" data-hide="" class="btn btn-success  btn-lg">NEXT</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="dialogBG"></div>
+
+        <div id="onerror">
+
+        </div>
+
+        <footer id="footer" class="footer">
+            <div id="scaleFooter" class="">
+
+                <div id="footerBtns" class="switchFooter" data-show="gameGrid manageCats">
+                    <div id="catChooseBtn">
+
+                    </div>
+
+
+                    <!--<div id="catChoose" class="btnWindow hide">
+
+
+
+
+                    </div>-->
+
+
+                </div>
+
+                <div id="footerInfo">
+                    <div id="paws">
+                        <span id="pawsCount">0</span>
+                        <img id="pawImg" src="img/paw.png" />
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </footer>
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster 
+        -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>');
+            window.jQuery.ui || document.write('<script src="js/vendor/jquery-ui.min.js"><\/script>');</script>
+
+
+
+
+
+        <script src="js/bootstrap.min.js"></script>
+
+        <script src="js/polyfill.js"></script>
+        <script src="js/helper.js"></script>
+        <script src="js/nomin/objects.js"></script>
+        <script src="js/nomin/levels.js"></script>
+        <script src="js/nomin/money.js"></script>
+        <script src="js/nomin/output.js"></script>
+        <script src="js/nomin/events.js"></script>
+        <script src="js/nomin/game.js"></script>
+        <script src="js/nomin/cats.js"></script>
+        <script src="js/main.js"></script>
+
+    </body>
+</html>
