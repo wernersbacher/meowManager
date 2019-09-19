@@ -1,6 +1,6 @@
 /* global game */
 
-window.onerror = error;
+//window.onerror = error;
 
 function error(Nachricht, Datei, Zeile) {
     var fehler = Nachricht + "\n" + Datei + "\n" + Zeile;

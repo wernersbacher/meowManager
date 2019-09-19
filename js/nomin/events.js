@@ -24,6 +24,7 @@ events = {
 
             if (objectOwner.indexOf(activeCat) > -1) { //Entfernt die Katze vom Spielbrett, falls schon dort
                 game.level.objects[clickedObject].owner.remove(activeCat);
+                game.level.cats[activeCat].wps = 0; //set 0 wps for removed cats
                 show = false;
             } else {//Setzt die aktive Katze rein und entfernt sie aus dem alten Objekt
                 var delKey = ownerToObject(activeCat, game.level.objects); //Findet den alten Platz der aktiven Katze heraus

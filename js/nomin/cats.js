@@ -2,7 +2,7 @@ var cats = {
     orange: {
         wps: 1.5,
         delay: 0,
-        expo: 1,
+        expo: 1.05,
         wpd: 100,
         bonus: ["washmachine"],
         desc: "Orange cat"
@@ -10,7 +10,7 @@ var cats = {
     brown: {
         wps: 2.5,
         delay: 1,
-        expo: 1.2,
+        expo: 1.02,
         wpd: 150,
         bonus: ["washmachine"],
         desc: "brown"
@@ -18,7 +18,7 @@ var cats = {
     black: {
         wps: 7,
         delay: 3,
-        expo: 1.5,
+        expo: 1.05,
         wpd: 500,
         bonus: ["washmachine"],
         desc: "NIIIINJA"

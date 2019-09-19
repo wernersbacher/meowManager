@@ -15,6 +15,10 @@ game = {
     restWps: 1,
     levelRunning: false,
 
+    config: {
+        max_expo_multi: 2,
+        expo_default_power: 1.1
+    },
     //++ Methods ++++
     init: function () {
         game.load();
@@ -209,10 +213,21 @@ game = {
                 wps += game.autoWps; //calculateAutoWps()
             }
 
-            if (!auto && owner.length) {
-                //if we aren't automatic AND there is a cat assigned..
+            if (owner.length) {
+                
+                //loop all the cats on an object
                 for (var i = 0, l = owner.length; i < l; i++) {
-                    let catwps = game.calcWPS(owner[i]);
+                
+                    if (auto) { //for the case that the object is automatic driven, show 0 wps and skippp
+                        game.level.cats[owner[i]].wps = 0;
+                        continue;   
+                    }
+
+                    
+                    let catwps = game.calcWPSLive(owner[i]);
+                    game.level.cats[owner[i]].wps = catwps;
+                    
+                    
                     
                     //Hier werden alle Katzen durchgegangen, die auf einem Objekt sitzen und entsprechend die wps erhöht
                     wps += catwps; //owner[i] = katze
@@ -228,6 +243,8 @@ game = {
                     }
                 }
             }
+
+            
 
             function ende(k) {
                 return calcWP(end[k], wp);
@@ -301,20 +318,41 @@ game = {
 
     }, //Kalkuliert die Faktoren live anhand der gespeicherten upgrades
     calcWPS: function (cat) {
-        var wps = cats[cat].wps;
-        var multi = game.session.catStats[cat].wps;
-        return wps * multi;
+        var wps = cats[cat].wps; // base values
+        var wps_multi = game.session.catStats[cat].wps;
+
+        return wps * wps_multi;
     },
     calcWPD: function (cat) {
         var wpd = cats[cat].wpd;
         var multi = game.session.catStats[cat].wpd;
         return wpd * multi;
     },
-    calcEXPO: function (cat) {
+    calcEXPO: function (cat) { //that value doesn't change over a level
         var expo = cats[cat].expo;
         var multi = game.session.catStats[cat].expo;
         return expo * multi;
     },
+
+    calcWPSLive: function (cat) { 
+        var base_wps = game.calcWPS(cat);
+        
+        var expo = game.calcEXPO(cat); //load expo from cat
+        var now = timestamp(); //get now time
+
+        var start_time = game.level.assignTimes[cat];
+        var since = (now-start_time)/1000;
+
+        var expo_factor = game.calcEXPOFactor(since, expo) //calculate boost from staying at same task
+
+        return base_wps * expo_factor;
+    },
+
+    calcEXPOFactor: function (time, expo_base) { //that value changes while playing
+        // formula 
+        return Math.min(1 + (expo_base-1)*Math.pow(time, game.config.expo_default_power), game.config.max_expo_multi)
+    },
+
     updateAllCats: function () {
         //if user has cat, updateCatUps()
         var userCats = game.data.cats;

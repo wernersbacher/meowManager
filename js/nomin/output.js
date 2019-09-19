@@ -250,7 +250,8 @@ output = {
         $("#current_wpd").html(`${wpd.toFixed(0)}/${max_wpd} WPD`);
 
         //WPS in Zahlen anzeigen
-        let catwps = game.calcWPS(cat);        
+        let catwps = game.level.cats[cat].wps; //game.calcWPS(cat);     
+        console.log(catwps)   
         $("#current_wps").html(`${catwps.toFixed(2)} WPS`);
 
     },
