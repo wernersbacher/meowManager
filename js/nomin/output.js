@@ -267,6 +267,7 @@ output = {
     resetEnergy: function() {
         $("#current_wps").html(`... WPS`);
         $("#current_wpd").html(`... WPD`);
+        $("#current_timer").html(``);
         $("#catEnergy > .bar").css('background-color', "green").width("100%");
     },
     show100: function (key) {

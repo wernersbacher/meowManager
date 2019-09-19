@@ -443,13 +443,15 @@ game = {
             //Neuer Rekord oder keine Daten vorhanden
             var oStars = 0;
             if (game.data.level.hasOwnProperty(level))
-                oStars = game.data.level[level.stars];
+                oStars = game.data.level[level].stars;
             game.data.level[level] = {time: time, stars: stars};
             newHi = true;
             if (stars > oStars) { //belohnung für sterne
                 eco.addMoney(eco.calcMoneyWin(stars - oStars, level));
             }
+            console.log(stars, oStars, level, eco.calcMoneyWin(stars - oStars, level))
         }
+
         //Belohnung für levelabschluss
         eco.addMoney(Math.ceil((level + 1) / 3));
 

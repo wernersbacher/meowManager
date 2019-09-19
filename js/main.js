@@ -23,7 +23,6 @@ $(document).ready(function () {
 
  currently: 
  sterne
- timer anzeigen
 
  fixes:
 
