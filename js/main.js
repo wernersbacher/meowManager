@@ -18,6 +18,12 @@ $(document).ready(function () {
 });
 
 // TODO
+
+/* 2019
+ * commenting doProgress code, implement EXPO
+
+*/
+
 /* outoffocus: pause 
  * pause einbauen
  * achievements

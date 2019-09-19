@@ -1,8 +1,4 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 /* global output, events, cats, tasks, objects, levels, money, eco, catUps */
 
@@ -334,8 +330,10 @@ game = {
                 //wenn das upgrade bei wps zu finden ist..
                 if (catUps.wps.hasOwnProperty(up)) {
                     wps *= Math.pow(catUps.wps[up].multi, ups[up]); //berechnet den multi des ups hoch anzahl des bessenenen
+                
                 } else if (catUps.wpd.hasOwnProperty(up)) {
                     wpd *= Math.pow(catUps.wpd[up].multi, ups[up]);
+                
                 } else if (catUps.expo.hasOwnProperty(up)) {
                     expo *= Math.pow(catUps.expo[up].multi, ups[up]);
                 }

@@ -246,8 +246,12 @@ output = {
         
         $("#catEnergy > .bar").css('background-color', hex).width(percent+"%");
 
+        //Energie in Zahlen anzeigen
+        $("#current_wpd").html(`${wpd.toFixed(0)}/${max_wpd} WPD`);
+
     },
     resetEnergy: function() {
+        $("#current_wpd").html(`... WPD`);
         $("#catEnergy > .bar").css('background-color', "green").width("100%");
     },
     show100: function (key) {
