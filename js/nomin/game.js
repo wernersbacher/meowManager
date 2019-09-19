@@ -54,7 +54,7 @@ game = {
     hardReset: function () {
         game.newGame();
         game.saveGame();
-        game.load();
+        location.reload(); 
     },
     getSaveGameLocal: function () {
 
