@@ -244,14 +244,14 @@ output = {
         for (var key in cats)
             if (cats.hasOwnProperty(key)) {
                 if (cats[key].wps > 0 && output.wiggleStorage.indexOf(key) < 0) {
-                        //cat has to wiggle but doesnt yet
-                        //add wiggle class here..
-                    //$('[data-cat="'+key+'"]').toggleClass("shake-little");
+                    //cat has to wiggle but doesnt yet
+                    //add wiggle class here..
+                    $('[data-cat="'+key+'"]').addClass("shake-little");
                     output.wiggleStorage.push(key);
                 } else if (cats[key].wps == 0 && output.wiggleStorage.indexOf(key) > -1) {
-                        //cat not allowed to wiggle but does it...
-                        //remove wiggle class here..
-                    //$('[data-cat="'+key+'"]').toggleClass("shake-little");
+                    //cat not allowed to wiggle but does it...
+                    //remove wiggle class here..
+                    $('[data-cat="'+key+'"]').removeClass("shake-little");
                     output.wiggleStorage.remove(key);
                 }
             }

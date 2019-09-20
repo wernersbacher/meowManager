@@ -7,7 +7,7 @@
   Licensed under MIT
 \* * * * * * * * * * * * * * * * * * * * */
 .shake-little {
-  display: inherit;
+  /*display: inherit;*/
   transform-origin: center center; }
 
 .shake-freeze,
@@ -125,6 +125,6 @@
 .shake-little:hover,
 .shake-trigger:hover .shake-little, .shake-little.shake-freeze, .shake-little.shake-constant {
   animation-name: shake-little;
-  animation-duration: 100ms;
+  animation-duration: 150ms;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite; }
