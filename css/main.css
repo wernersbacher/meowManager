@@ -215,7 +215,6 @@ code {
 }
 
 .gridItem {
-    text-align: center;
     box-sizing: border-box;
     padding: 5%;
     position: absolute;
@@ -231,14 +230,30 @@ code {
     border-radius: 2px 2px 4px 4px;
     box-sizing:border-box;
     position:relative;
-    background-color:darkred;
+    /*background-color:darkred;*/
     cursor:pointer;
+    transition: all 0.2s ease;
+}
+
+.item_orange {
+    background: linear-gradient(to bottom, #ff9e39 0%,#ff7b0d 100%);
+}
+
+.item_red {
+    /*background: #7f0000;*/
+    background: linear-gradient(to bottom, #c60307 0%,#930002 100%);
+}
+.item_white {
+    /*background: #7f0000;*/
+    background:white;
+    border: 1px solid #e8e7e7;
 }
 
 .itemImg {
     margin-top:7.5%;
-    width:60%;
+    width:40%;
     height:auto;
+    margin-left: 10%;
 }
 
 .itemBar {
@@ -288,19 +303,36 @@ code {
 
 .itemCat {
     position: absolute;
-    right: 1%;
-    top: 1%;
-    width: 21%;
+
+    right: 9%;
+    top: 4%;
+    width: 20%;
     height: auto;
-    display:flex;
+    
+    display: flex;
+    
     flex-direction: column;
 }
 
 .cat {
     width: 100%;
-    /* height: 100%; */
+
+    height: 100%;
+    
     object-fit: contain;
+    
     display: none;
+    
+    padding: 5px;
+    
+    border-radius: 3px;
+    
+    background: #cecece9e;
+    
+    margin: 2px;
+    
+    border: 1px solid #cacaca;
+    box-shadow: 0px 2px 6px -4px black;
 }
 
 .disabled {
@@ -399,6 +431,10 @@ code {
 
 .hide {
     display:hidden;
+}
+
+#mainmenu > button {
+    margin: 1.5% 0;
 }
 
 

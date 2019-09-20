@@ -27,7 +27,7 @@ output = {
             }
             output += '<div class="gridCol">' +
                     '<div class="gridItem">' +
-                    '<div id="' + key + '" data-name="' + key + '" class="item">' +
+                    '<div id="' + key + '" data-name="' + key + '" class="item item_red">' +
                     '<img src="img/objects/' + key + '.png" class="itemImg" />' +
                     '<div class="itemBar">' +
                     '<div class="meter">' +
@@ -36,9 +36,9 @@ output = {
                     '</div>' +
                     '</div>' +
                     '<div class="itemCat">\n\
-                    <img src="img/cats/orange.png" class="cat" data-cat="orange" />\n\
-                    <img src="img/cats/brown.png" class="cat" data-cat="brown" />\n\
-                    <img src="img/cats/black.png" class="cat" data-cat="black" />\n\
+                    <img src="img/cats/orange.png" class="cat shake-constant" data-cat="orange" />\n\
+                    <img src="img/cats/brown.png" class="cat shake-constant" data-cat="brown" />\n\
+                    <img src="img/cats/black.png" class="cat shake-constant" data-cat="black" />\n\
                     </div>' +
                     '</div>' +
                     '</div>' +
@@ -215,6 +215,7 @@ output = {
         //Generierte Objekte ausgeben.
         $("#levelSelect").html(output);
     },
+    wiggleStorage: [], //save the wiggle status, if a cat changes its class needs to be changed
     colorStorage: [], //Speichert die keys ab, um unnötige DOM Änderungen vorzubeugen, speichert orange ab
     loadProgress: function () {
         //Prozente berechnen und anzeigen
@@ -229,12 +230,32 @@ output = {
                 //do nothing
             } else if (output.colorStorage.indexOf(key) < 0 && game.level.objects[key].auto) {
                 output.colorStorage.push(key); //zu orange wechseln
-                $("#" + key).animate({backgroundColor: '#FFA500'}, 50);
+                //$("#" + key).animate({backgroundColor: '#FFA500'}, 50);
+                $("#" + key).toggleClass("item_red item_orange");
             } else if (output.colorStorage.indexOf(key) > -1 && !game.level.objects[key].auto) {
                 output.colorStorage.remove(key);
-                $("#" + key).animate({backgroundColor: '#7f0000'}, 50);
+                //$("#" + key).animate({backgroundColor: '#7f0000'}, 50);
+                $("#" + key).toggleClass("item_red item_orange");
         }
         });
+
+        //Loop over all cats and check if there are wiggling or not
+        var cats = game.level.cats;
+        for (var key in cats)
+            if (cats.hasOwnProperty(key)) {
+                if (cats[key].wps > 0 && output.wiggleStorage.indexOf(key) < 0) {
+                        //cat has to wiggle but doesnt yet
+                        //add wiggle class here..
+                    //$('[data-cat="'+key+'"]').toggleClass("shake-little");
+                    output.wiggleStorage.push(key);
+                } else if (cats[key].wps == 0 && output.wiggleStorage.indexOf(key) > -1) {
+                        //cat not allowed to wiggle but does it...
+                        //remove wiggle class here..
+                    //$('[data-cat="'+key+'"]').toggleClass("shake-little");
+                    output.wiggleStorage.remove(key);
+                }
+            }
+        
 
         //Energieleiste anzeigen
         var cat = game.level.activeCat;
@@ -253,7 +274,7 @@ output = {
         $("#catEnergy > .bar").css('background-color', hex).width(percent+"%");
 
         //Energie in Zahlen anzeigen
-        $("#current_wpd").html(`${wpd.toFixed(2)}/${max_wpd} WPD`);
+        $("#current_wpd").html(`${wpd.toFixed(2)}/${max_wpd.toFixed(2)} WPD`);
 
         //WPS in Zahlen anzeigen
         let catwps = game.level.cats[cat].wps; //game.calcWPS(cat);     
@@ -272,7 +293,8 @@ output = {
     },
     show100: function (key) {
         $("#" + key).animate({color: 'white'}, 130);
-        $("#" + key).animate({backgroundColor: 'white'}, 130);
+        //$("#" + key).animate({background: 'white'}, 130);
+        $("#" + key).removeClass("item_red item_orange").addClass("item_white");
     },
     showLevelDone: function (time, oldTime, stars, newHi) {
         //$("#hints").html("YOU WON! You took " + formatDate(time) + " and got " + stars + " stars");
