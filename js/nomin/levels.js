@@ -44,7 +44,7 @@ var levels = {
                         //Sortieren nach Zahl aufsteigend, for(i) start[i] - end[i] ist der bereich.
             }
         },
-        stars: [35, 24, 18],
+        stars: [35  , 24, 18],
         title: "Beginner 2"
     },
     3: {

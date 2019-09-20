@@ -143,7 +143,7 @@ var catUps = {
             label: "Restoring!",
             desc: "Even faster with super speed.",
             cost: 12,
-            multi: 1.45,
+            multi: 1.25,
             count: 3
         }
     }

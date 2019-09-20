@@ -174,6 +174,9 @@ game = {
         game.doProgress();
     },
     doProgress: function () {
+
+        
+
         //Berechnung der einzelnen wps, die an einem Objekt durchgeführt werden
         Object.entries(game.level.objects).forEach(([key, val]) => { //Durchgehen der einzelnen Objekte im Level
             
@@ -192,16 +195,25 @@ game = {
             var i = 0;
             var debug = "";
 
+            function ende(k) {
+                return calcWP(end[k], wp);
+            }
+            function anfang(k) {
+                return calcWP(start[k], wp);
+            }
+
             //Speichert den Auto Wert für den nächsten Durchgang
             game.level.objects[key].lastAuto = game.level.objects[key].auto;
 
             //Schaut, ob der Fortschritt im aktiven Bereich ist
             // checks if we are currently in an automatic area
             for (i = 0, l = start.length; i < l; i++) {
-                if (progress >= calcWP(start[i], wp) && progress < calcWP(end[i], wp)) {
+                if (progress >= anfang(i) && progress < calcWP(end[i], wp)) {
                     auto = false;
                     break;
-                } else if (progress >= calcWP(end[i], wp) && XOR(progress >= ende(max_i) && progress < wp, progress < calcWP(start[i + 1], wp))) {
+                } else if (progress > ende(i) && XOR(progress >= ende(max_i) && progress < wp, progress < anfang(i+1) ) ) { //???? dont get it
+                    //      ^^ progress bigger than end of i-iteration AND one of both: 
+                    //  (position smaller than start from next it) xor (progress smaller as total AND progress is bigger as last cat-area)
                     auto = true;
                     break;
                 }
@@ -246,13 +258,6 @@ game = {
 
             
 
-            function ende(k) {
-                return calcWP(end[k], wp);
-            }
-            function anfang(k) {
-                return calcWP(start[k], wp);
-            }
-
             function checkProg() {
                 if (game.level.objects[key]["progress"] >= wp) {
                     game.level.objects[key]["progress"] = wp;
@@ -269,7 +274,8 @@ game = {
                     wpsNow = wps / game.fps,
                     j = game.level.objects[key]["j"],
                     done = game.level.objects[key].done;
-
+            if (key === debug)
+                console.log(progress, wpsNow, progress, ende(i));
 
             if (key === debug)
                 console.log(auto, game.level.objects[key].auto);
@@ -277,7 +283,7 @@ game = {
 
             if (done) {
 
-            } else if (progress + wpsNow > ende(j) && !auto) { //sollte es weiter springen als über den eigenen bereich als katze
+            } else if (progress + wpsNow >= ende(j) && !auto) { //sollte es weiter springen als über den eigenen bereich als katze
                 game.level.objects[key]["progress"] = ende(j);
                 if (j < max_i) {//nur wenn es so viele bereiche gibt, darf es erhöhen
                     game.level.objects[key]["j"] += 1;
@@ -449,7 +455,6 @@ game = {
             if (stars > oStars) { //belohnung für sterne
                 eco.addMoney(eco.calcMoneyWin(stars - oStars, level));
             }
-            console.log(stars, oStars, level, eco.calcMoneyWin(stars - oStars, level))
         }
 
         //Belohnung für levelabschluss
